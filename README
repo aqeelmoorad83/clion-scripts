@@ -1,0 +1,36 @@
+SUPPORT TOOLS FOR CLION
+Here are a couple of scripts which make the CLion IDE nicer to use. They basically replicate the
+build process used by CLion itself, from the command-line, allowing the build and test process to
+be run from the command-line. There's also a mkproj.sh script that can generate ready-made CLion-
+compatible minimal projects.
+
+1) Install CLion from https://www.jetbrains.com/clion (e.g to ${HOME}/clion-2016.3).
+
+2) Install GoogleTest:
+
+  wget --no-check-certificate -qO- https://github.com/google/googletest/archive/release-1.8.0.tar.gz | tar zxf -
+  cd googletest-release-1.8.0/googletest
+  ${HOME}/clion-2016.3/bin/cmake/bin/cmake .
+  make
+  sudo cp libgtest*.a /usr/lib/
+  sudo cp -r include/gtest /usr/include/
+  cd ../..
+  rm -rf googletest-release-1.8.0
+
+3) Install report-generation tools:
+
+  sudo apt-get install lcov xsltproc
+
+4) Now you can easily create ready-made minimal projects that can be loaded into CLion. You might
+want to edit the mkproj.sh script to choose a different compiler (I'm using a local build of
+gcc/6.2.0 located in ${HOME}/gcc):
+
+  mkdir -p ${HOME}/ClionProjects
+  cd ${HOME}/ClionProjects
+  mkproj.sh fred
+  cd fred
+  build.sh debug
+  cmake-build-debug/fred     # run compiled executable
+  gtest.sh debug unit-tests  # run tests, view test & coverage reports
+
+Have fun!
