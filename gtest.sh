@@ -32,8 +32,7 @@ if [ $CONFIG = "debug" ]; then
     lcov -t ${TESTDIR} -o ${PREFIX}.info -c -d ${PREFIX}.dir
     lcov --remove ${PREFIX}.info '/usr/include/*' '6.2.0/*' -o ${PREFIX}-filtered.info
     mkdir -p ${REPORT_DIR}/${TESTDIR}
-    genhtml -o ${REPORT_DIR}/${TESTDIR} ${PREFIX}-filtered.info
-    cp ${REPORT_DIR}/${TESTDIR}/gcov.css ${REPORT_DIR}/${TESTDIR}/gcov.css.old
+    genhtml --demangle-cpp -o ${REPORT_DIR}/${TESTDIR} ${PREFIX}-filtered.info
     patch ${REPORT_DIR}/${TESTDIR}/gcov.css <<EOF
 --- cmake-build-debug/gcov-report/unit-tests/gcov.css	2016-12-05 11:33:01.391355380 +0000
 +++ cmake-build-debug/gcov-report/unit-tests/gcov.css	2016-12-05 11:42:52.237944130 +0000
@@ -49,7 +48,11 @@ if [ $CONFIG = "debug" ]; then
 +td {
 +  font-size: 75%;
  }
-@@ -373,2 +377,3 @@
+@@ -343,2 +347,3 @@
+   font-family: monospace;
++  font-size: 100%;
+ }
+@@ -373,2 +378,3 @@
    margin-top: 2px;
 +  font-size: 140%;
  }
