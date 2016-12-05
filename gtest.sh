@@ -33,6 +33,27 @@ if [ $CONFIG = "debug" ]; then
     lcov --remove ${PREFIX}.info '/usr/include/*' '6.2.0/*' -o ${PREFIX}-filtered.info
     mkdir -p ${REPORT_DIR}/${TESTDIR}
     genhtml -o ${REPORT_DIR}/${TESTDIR} ${PREFIX}-filtered.info
+    cp ${REPORT_DIR}/${TESTDIR}/gcov.css ${REPORT_DIR}/${TESTDIR}/gcov.css.old
+    patch ${REPORT_DIR}/${TESTDIR}/gcov.css <<EOF
+--- cmake-build-debug/gcov-report/unit-tests/gcov.css	2016-12-05 11:33:01.391355380 +0000
++++ cmake-build-debug/gcov-report/unit-tests/gcov.css	2016-12-05 11:42:52.237944130 +0000
+@@ -158,3 +158,2 @@
+   font-family: sans-serif;
+-  font-size: 120%;
+   font-weight: bold;
+@@ -179,2 +178,7 @@
+   font-family: monospace;
++  font-size: 100%;
++}
++
++td {
++  font-size: 75%;
+ }
+@@ -373,2 +377,3 @@
+   margin-top: 2px;
++  font-size: 140%;
+ }
+EOF
     COVERAGE_REPORT="${REPORT_DIR}/${TESTDIR}/${PROJECT}/index.html"
   fi
 fi

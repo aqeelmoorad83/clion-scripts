@@ -31,6 +31,9 @@
         color:#000000;
         font-size:68%;
       }
+      table tr td, table tr th {
+        font-size:68%;
+      }
       table.details tr th {
         font-weight:bold;
         text-align:left;
@@ -83,7 +86,7 @@
       <a href="#top">Back to top</a>
     </xsl:for-each>
 
-	 <!-- Some blank space at the bottom so if the last testsuite is small, links to it work properly -->
+    <!-- Some blank space at the bottom so if the last testsuite is small, links to it work properly -->
     <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
     <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
     <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
