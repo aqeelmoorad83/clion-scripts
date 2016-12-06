@@ -15,7 +15,11 @@ SCRIPTDIR="$(dirname -- "${0}")"
 if [ ! -e cmake-build-${CONFIG} ]; then
   mkdir cmake-build-${CONFIG}
   cd cmake-build-${CONFIG}
-  ${HOME}/clion-2016.3/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=$(echo ${CONFIG} | perl -ane 'chomp;print ucfirst($_);') ..
+  ${HOME}/clion-2016.3/bin/cmake/bin/cmake .. \
+    -DCMAKE_CXX_COMPILER=${HOME}/gcc/bin/g++ \
+    -DCMAKE_EXE_LINKER_FLAGS=-Wl,-rpath,${HOME}/gcc/lib64 \
+    -DCMAKE_BUILD_TYPE=$(echo ${CONFIG} | perl -ane 'chomp;print ucfirst($_);') \
+    #-DCMAKE_VERBOSE_MAKEFILE=ON
   cd ..
 fi
 ${HOME}/clion-2016.3/bin/cmake/bin/cmake --build cmake-build-${CONFIG} --target ${TESTDIR} -- -j 2
@@ -30,7 +34,7 @@ if [ $CONFIG = "debug" ]; then
   (ls ${PREFIX}.dir/*.gcda 2>&1) > /dev/null
   if [ $? -eq 0 ]; then
     lcov -t ${TESTDIR} -o ${PREFIX}.info -c -d ${PREFIX}.dir
-    lcov --remove ${PREFIX}.info '/usr/include/*' '6.2.0/*' -o ${PREFIX}-filtered.info
+    lcov --remove ${PREFIX}.info '/usr/include/*' '6.2.0/*' 'google*' -o ${PREFIX}-filtered.info
     mkdir -p ${REPORT_DIR}/${TESTDIR}
     genhtml --demangle-cpp -o ${REPORT_DIR}/${TESTDIR} ${PREFIX}-filtered.info
     patch ${REPORT_DIR}/${TESTDIR}/gcov.css <<EOF
