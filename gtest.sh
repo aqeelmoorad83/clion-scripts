@@ -16,10 +16,7 @@ if [ ! -e cmake-build-${CONFIG} ]; then
   mkdir cmake-build-${CONFIG}
   cd cmake-build-${CONFIG}
   ${HOME}/clion-2016.3/bin/cmake/bin/cmake .. \
-    -DCMAKE_CXX_COMPILER=${HOME}/gcc/bin/g++ \
-    -DCMAKE_EXE_LINKER_FLAGS=-Wl,-rpath,${HOME}/gcc/lib64 \
-    -DCMAKE_BUILD_TYPE=$(echo ${CONFIG} | perl -ane 'chomp;print ucfirst($_);') \
-    #-DCMAKE_VERBOSE_MAKEFILE=ON
+    -DCMAKE_BUILD_TYPE=$(echo ${CONFIG} | perl -ane 'chomp;print ucfirst($_);')
   cd ..
 fi
 ${HOME}/clion-2016.3/bin/cmake/bin/cmake --build cmake-build-${CONFIG} --target ${TESTDIR} -- -j 2
