@@ -6,8 +6,6 @@ if [ $# -ne 1 ]; then
 fi
 PROJ=$1
 
-cd ${HOME}/ClionProjects
-
 if [ -d ${PROJ} ]; then
 	 echo "Project \"${PROJ}\" already exists"
 	 exit 2

@@ -30,4 +30,12 @@ gcc/6.2.0 located in ${HOME}/gcc):
   cmake-build-debug/fred     # run compiled executable
   gtest.sh debug unit-tests  # run tests, view test & coverage reports
 
+5) These minimal projects can also be built in MSVC++:
+
+  mkdir build
+  cd build
+  cmake .. -G "Visual Studio 14 Win64" -Dgtest_force_shared_crt=ON
+  MSBuild.exe unit-tests/unit-tests.vcxproj
+  unit-tests/Debug/unit-tests.exe
+
 Have fun!
