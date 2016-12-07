@@ -4,7 +4,7 @@ build process used by CLion itself, from the command-line, allowing the build an
 be run from the command-line. There's also a mkproj.sh script that can generate ready-made CLion-
 compatible minimal projects.
 
-1) Install CLion and install it (e.g to ${HOME}/clion-2016.3):
+1) Download CLion and install it (e.g to ${HOME}/clion-2016.3):
 
   https://www.jetbrains.com/clion 
 
